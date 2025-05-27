@@ -1,0 +1,134 @@
+[
+  {
+    "id": "prod-001",
+    "name": "Classic White T-Shirt",
+    "description": "A comfortable, everyday white tee made from organic cotton.A comfortable, everyday white tee made from organic cotton.A comfortable, everyday white tee made from organic cotton.",
+    "price": 599,
+    "stock": 100,
+    "images": [
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
+    ]
+  },
+  {
+    "id": "prod-002",
+    "name": "Running Shoes",
+    "description": "Lightweight and breathable running shoes.",
+    "price": 2499,
+    "stock": 0,
+    "images": [
+      "https://images.unsplash.com/photo-1513105737059-ff3e1e924b66"
+    ],
+    "variantAttributes": [
+      {
+        "name": "Size",
+        "values": ["7", "8", "9", "10"]
+      },
+      {
+        "name": "Color",
+        "values": ["Black", "White"]
+      }
+    ],
+    "variantCombinations": [
+      {
+        "attributes": { "Size": "8", "Color": "Black" },
+        "product": {
+          "id": "prod-002-1",
+          "name": "Running Shoes - Black 8",
+          "description": "Black shoes, size 8",
+          "price": 2499,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1513105737059-ff3e1e924b66"
+          ]
+        }
+      },
+      {
+        "attributes": { "Size": "9", "Color": "White" },
+        "product": {
+          "id": "prod-002-2",
+          "name": "Running Shoes - White 9",
+          "description": "White shoes, size 9",
+          "price": 2599,
+          "stock": 6,
+          "images": [
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-003",
+    "name": "Leather Wallet",
+    "description": "Premium quality leather wallet with RFID protection.",
+    "price": 1499,
+    "stock": 40,
+    "images": [
+      "https://images.unsplash.com/photo-1495121605193-b116b5b09a27"
+    ]
+  },
+  {
+    "id": "prod-004",
+    "name": "Men's Hoodie",
+    "description": "Cozy fleece-lined hoodie.",
+    "price": 1799,
+    "stock": 0,
+    "images": [
+      "https://images.unsplash.com/photo-1520975698885-6f04ec8a7dba"
+    ],
+    "variantAttributes": [
+      {
+        "name": "Size",
+        "values": ["M", "L", "XL"]
+      }
+    ],
+    "variantCombinations": [
+      {
+        "attributes": { "Size": "M" },
+        "product": {
+          "id": "prod-004-1",
+          "name": "Men's Hoodie - M",
+          "description": "Size M",
+          "price": 1799,
+          "stock": 4,
+          "images": [
+            "https://images.unsplash.com/photo-1520975698885-6f04ec8a7dba"
+          ]
+        }
+      },
+      {
+        "attributes": { "Size": "XL" },
+        "product": {
+          "id": "prod-004-2",
+          "name": "Men's Hoodie - XL",
+          "description": "Size XL",
+          "price": 1799,
+          "stock": 2,
+          "images": [
+            "https://images.unsplash.com/photo-1520975698885-6f04ec8a7dba"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-005",
+    "name": "Wireless Headphones",
+    "description": "Noise-cancelling over-ear headphones with long battery life.",
+    "price": 4999,
+    "stock": 25,
+    "images": [
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
+    ]
+  },
+  {
+    "id": "prod-006",
+    "name": "Smart Watch",
+    "description": "Fitness tracking smart watch with heart rate monitor.",
+    "price": 7999,
+    "stock": 15,
+    "images": [
+      "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b"
+    ]
+  }
+]

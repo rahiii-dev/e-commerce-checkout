@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #F97316;            /* Brand Primary Warm Orange */
+  --color-accent: #FDBA74;             /* Brand Accent Soft Orange */
+  --color-background: #0B101B;         /* Main Background (Black) */
+  --color-surface: #181E29;            /* Surface (Cards, Modals) */
+  --color-light-gray: #C9CED6;         /*Light Lines */
+}
+
+
+body {
+  @apply min-h-screen bg-background text-white;
+}

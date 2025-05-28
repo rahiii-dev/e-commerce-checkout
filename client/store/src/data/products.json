@@ -1,59 +1,122 @@
 [
   {
     "id": "prod-001",
-    "name": "Classic White T-Shirt",
-    "description": "A comfortable, everyday white tee made from organic cotton.A comfortable, everyday white tee made from organic cotton.A comfortable, everyday white tee made from organic cotton.",
-    "price": 599,
+    "name": "Regular Fit Vest top",
+    "description": "Vest top in sheer textured jersey with a straight-cut hem. Regular fit for comfortable wear and a classic silhouette.",
+    "price": 1299,
     "stock": 100,
     "images": [
-      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
-      "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
-      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
-    ]
-  },
-  {
-    "id": "prod-002",
-    "name": "Running Shoes",
-    "description": "Lightweight and breathable running shoes.",
-    "price": 2499,
-    "stock": 0,
-    "images": [
-      "https://images.unsplash.com/photo-1513105737059-ff3e1e924b66"
+      "https://image.hm.com/assets/hm/72/17/72173ad197be796573c9d20f214118d5fdb450de.jpg?imwidth=1260",
+      "https://image.hm.com/assets/hm/b6/f6/b6f6f0caad13c4e62a1e1ff89cf399f7c6001357.jpg?imwidth=1260",
+      "https://image.hm.com/assets/hm/2d/24/2d24564c264ded4823d1a1fc0d8aa270559e2305.jpg?imwidth=1260"
     ],
     "variantAttributes": [
-      {
+            {
         "name": "Size",
-        "values": ["7", "8", "9", "10"]
-      },
-      {
-        "name": "Color",
-        "values": ["Black", "White"]
+        "values": [
+          "XS",
+          "S",
+          "M",
+          "L"
+        ]
       }
     ],
     "variantCombinations": [
       {
-        "attributes": { "Size": "8", "Color": "Black" },
+        "attributes": {
+          "Size": "M"
+        },
         "product": {
-          "id": "prod-002-1",
-          "name": "Running Shoes - Black 8",
-          "description": "Black shoes, size 8",
-          "price": 2499,
-          "stock": 12,
+          "id": "prod-001-1",
+          "name": "Regular Fit Vest top - M",
+          "description": "Vest top in sheer textured jersey with a straight-cut hem. Regular fit for comfortable wear and a classic silhouette.",
+          "price": 1299,
+          "stock": 50,
           "images": [
-            "https://images.unsplash.com/photo-1513105737059-ff3e1e924b66"
+            "https://image.hm.com/assets/hm/72/17/72173ad197be796573c9d20f214118d5fdb450de.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/b6/f6/b6f6f0caad13c4e62a1e1ff89cf399f7c6001357.jpg?imwidth=1260"
           ]
         }
       },
       {
-        "attributes": { "Size": "9", "Color": "White" },
+        "attributes": {
+          "Size": "L"
+        },
+        "product": {
+          "id": "prod-001-1",
+          "name": "Regular Fit Vest top - L",
+          "description": "Vest top in sheer textured jersey with a straight-cut hem. Regular fit for comfortable wear and a classic silhouette.",
+          "price": 1299,
+          "stock": 50,
+          "images": [
+            "https://image.hm.com/assets/hm/2d/24/2d24564c264ded4823d1a1fc0d8aa270559e2305.jpg?imwidth=1260"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-002",
+    "name": "Regular Fit Resort shirt",
+    "description": "Shirt in a soft weave with a resort collar, French front and a yoke at the back. Short sleeves and a straight-cut hem. Regular fit for comfortable wear and a classic silhouette.",
+    "price": 2299,
+    "stock": 0,
+    "images": [
+      "https://image.hm.com/assets/hm/66/c1/66c1616579a3be646af3f9d1b82bb2efcb721d4b.jpg?imwidth=1260",
+      "https://image.hm.com/assets/hm/d5/dc/d5dc37e29488c76668465ae743aad62a7a33a808.jpg?imwidth=1260"
+    ],
+    "variantAttributes": [
+      {
+        "name": "Size",
+        "values": [
+          "XS",
+          "S",
+          "M",
+          "L"
+        ]
+      },
+      {
+        "name": "Color",
+        "values": [
+          "Black",
+          "Biege"
+        ]
+      }
+    ],
+    "variantCombinations": [
+      {
+        "attributes": {
+          "Size": "M",
+          "Color": "Black"
+        },
+        "product": {
+          "id": "prod-002-1",
+          "name": "Regular Fit Resort shirt",
+          "description": "Shirt in a soft weave with a resort collar, French front and a yoke at the back. Short sleeves and a straight-cut hem. Regular fit for comfortable wear and a classic silhouette.",
+          "price": 2499,
+          "stock": 12,
+          "images": [
+            "https://image.hm.com/assets/hm/b9/36/b936302cee4d8c20a8bf4d86dcaedb73d4f20909.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/48/86/4886820a44ea038262e694c02d2a16e0e9209a2d.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/2f/c8/2fc852c73779d0563a6a66b5666f3af03e9ce180.jpg?imwidth=1260"
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "Size": "L",
+          "Color": "Biege"
+        },
         "product": {
           "id": "prod-002-2",
-          "name": "Running Shoes - White 9",
-          "description": "White shoes, size 9",
-          "price": 2599,
-          "stock": 6,
+          "name": "Regular Fit Resort shirt",
+          "description": "Shirt in a soft weave with a resort collar, French front and a yoke at the back. Short sleeves and a straight-cut hem. Regular fit for comfortable wear and a classic silhouette.",
+          "price": 2299,
+          "stock": 0,
           "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+            "https://image.hm.com/assets/hm/55/a6/55a6d36e665489efc6918f75dc2b27202b90aeff.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/00/40/0040e4e2ae0d24f2f696459d37cb3a8d1d7ce182.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/e5/6a/e56a178d15348a8792b41efdb6816dc17cdba0d3.jpg?imwidth=1260"
           ]
         }
       }
@@ -61,12 +124,56 @@
   },
   {
     "id": "prod-003",
-    "name": "Leather Wallet",
-    "description": "Premium quality leather wallet with RFID protection.",
+    "name": "Sunglasses",
+    "description": "Sunglasses with plastic and metal frames and tinted, UV-protective lenses in plastic.",
     "price": 1499,
     "stock": 40,
     "images": [
-      "https://images.unsplash.com/photo-1495121605193-b116b5b09a27"
+      "https://image.hm.com/assets/hm/5b/e3/5be3a7530fb8b6c5ea57dc6da238535049882e5c.jpg?imwidth=1260",
+      "https://image.hm.com/assets/hm/d2/32/d2325c7ab568230e1973a4fa61100ea5a0512945.jpg?imwidth=1260"
+    ],
+    "variantAttributes": [
+      {
+        "name": "Color",
+        "values": [
+          "Biege",
+          "Brown"
+        ]
+      }
+    ],
+    "variantCombinations": [
+      {
+        "attributes": {
+          "Color": "Biege"
+        },
+        "product": {
+          "id": "prod-003-1",
+          "name": "Sunglasses - Biege",
+          "description": "Sunglasses with plastic and metal frames and tinted, UV-protective lenses in plastic.",
+          "price": 1499,
+          "stock": 20,
+          "images": [
+            "https://image.hm.com/assets/hm/5b/e3/5be3a7530fb8b6c5ea57dc6da238535049882e5c.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/63/78/6378376217265a23141839a90416936ffcbb6854.jpg?imwidth=1260"
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "Color": "Brown"
+        },
+        "product": {
+          "id": "prod-003-2",
+          "name": "Sunglasses - Brown",
+          "description": "Sunglasses with plastic and metal frames and tinted, UV-protective lenses in plastic.",
+          "price": 1499,
+          "stock": 20,
+          "images": [
+            "https://image.hm.com/assets/hm/d2/32/d2325c7ab568230e1973a4fa61100ea5a0512945.jpg?imwidth=1260",
+            "https://image.hm.com/assets/hm/36/93/36938db583b8ec677241c3ab9f1877db14de24a0.jpg?imwidth=1260"
+          ]
+        }
+      }
     ]
   },
   {
@@ -76,17 +183,23 @@
     "price": 1799,
     "stock": 0,
     "images": [
-      "https://images.unsplash.com/photo-1520975698885-6f04ec8a7dba"
+      "https://image.hm.com/assets/hm/f7/45/f7453559ddf0899a9edf2cbeb0e93d6e53758bb4.jpg?imwidth=1260"
     ],
     "variantAttributes": [
       {
         "name": "Size",
-        "values": ["M", "L", "XL"]
+        "values": [
+          "M",
+          "L",
+          "XL"
+        ]
       }
     ],
     "variantCombinations": [
       {
-        "attributes": { "Size": "M" },
+        "attributes": {
+          "Size": "M"
+        },
         "product": {
           "id": "prod-004-1",
           "name": "Men's Hoodie - M",
@@ -99,7 +212,9 @@
         }
       },
       {
-        "attributes": { "Size": "XL" },
+        "attributes": {
+          "Size": "XL"
+        },
         "product": {
           "id": "prod-004-2",
           "name": "Men's Hoodie - XL",

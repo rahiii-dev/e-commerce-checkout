@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Text from "../atoms/Text";
 
+
 interface ProductCardProps {
     name: string;
     price: number;
@@ -24,7 +25,8 @@ const ProductCard = ({
         <div className="w-full relative max-w-sm mx-auto border-white/10 rounded-2xl group bg-surface/70 backdrop-blur-md border overflow-hidden shadow-xl transition-transform transform hover:-translate-y-2 hover:shadow-primary/30 flex flex-col h-full">
 
             <Link to={productUrl || "#"} className="flex-1 flex flex-col">
-                <div className="relative w-full h-56 overflow-hidden">
+                <div className="relative w-full h-56 overflow-hidden"
+                    >
                     <img
                         src={imageUrl}
                         alt={name}

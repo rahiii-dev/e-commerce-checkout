@@ -20,10 +20,16 @@ const ProductGrid = () => {
         setModalOpen(true);
     }
 
+    const handlCloseModal = () => {
+        setModalOpen(false);
+        setSelectedProduct(null);
+    }
+
     return (
         <ProductGridLayout>
             {products.map((product) => (
                 <ProductCard
+                    key={product.id}
                     name={product.name}
                     price={product.price}
                     imageUrl={product.images[0]}
@@ -40,7 +46,7 @@ const ProductGrid = () => {
 
             <ProductDisplayModal
                 isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
+                onClose={handlCloseModal}
                 product={selectedProduct}
             />
         </ProductGridLayout>

@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-background rounded-2xl shadow-xl max-w-lg w-full p-6 relative">
+      <div className="bg-background rounded-2xl shadow-xl w-max p-6 relative">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -26,7 +26,7 @@ const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
         {title && <Text as="h2" className="text-xl font-semibold mb-4">{title}</Text>}
 
         {/* Content */}
-        <div>{children}</div>
+        <div className="mt-3">{children}</div>
       </div>
     </div>,
     document.body

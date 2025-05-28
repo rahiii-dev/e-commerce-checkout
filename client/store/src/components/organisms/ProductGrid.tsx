@@ -1,24 +1,48 @@
 import { useEffect, useState } from "react";
 import ProductGridLayout from "../templates/ProductGridLayout";
-import ProductCardWithActions from "./ProductCardWithActions";
 import productsData from "../../data/products.json";
 import type { IProduct } from "../../types/product.interface";
+import ProductCard from "../molecules/ProductCard";
+import Button from "../atoms/Button";
+import ProductDisplayModal from "./ProductDisplayModal";
 
 const ProductGrid = () => {
     const [products, setProducts] = useState<IProduct[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         setProducts(productsData as IProduct[]);
     }, []);
 
+    const hanldeSelectProduct = (product: IProduct) => {
+        setSelectedProduct(product);
+        setModalOpen(true);
+    }
+
     return (
         <ProductGridLayout>
             {products.map((product) => (
-                <ProductCardWithActions
-                    key={product.id}
-                    product={product}
-                />
+                <ProductCard
+                    name={product.name}
+                    price={product.price}
+                    imageUrl={product.images[0]}
+                    secondImageUrl={product.images[1]}
+                >
+
+                    <div className="h-full">
+                        <Button onClick={() => hanldeSelectProduct(product)} className="mt-4 w-full cursor-pointer">
+                            Buy Now
+                        </Button>
+                    </div>
+                </ProductCard>
             ))}
+
+            <ProductDisplayModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                product={selectedProduct}
+            />
         </ProductGridLayout>
     );
 }

@@ -3,7 +3,6 @@ import Text from "../atoms/Text";
 
 interface ProductCardProps {
     name: string;
-    description: string;
     price: number;
     currency?: string;
     imageUrl: string;
@@ -14,7 +13,6 @@ interface ProductCardProps {
 
 const ProductCard = ({
     name,
-    description,
     price,
     currency = "Rs.",
     imageUrl,
@@ -46,9 +44,6 @@ const ProductCard = ({
                     <Text className="text-accent font-bold mt-1">
                         {currency}
                         {price.toFixed(2)}
-                    </Text>
-                    <Text className="text-sm text-white/70 mt-2 line-clamp-3">
-                        {description}
                     </Text>
                 </div>
             </Link>

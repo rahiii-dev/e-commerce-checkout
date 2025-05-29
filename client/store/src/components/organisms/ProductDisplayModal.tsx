@@ -3,6 +3,11 @@ import type { IBaseProduct, IProduct } from "../../types/product.interface";
 import Modal from "../molecules/Modal";
 import Button from "../atoms/Button";
 import ProductImageSlider from "../molecules/ProductImageSlider";
+import { useNavigate } from "react-router-dom";
+import { checkoutService } from "../../services/checkout.service";
+import { toast } from "sonner";
+import { handleError } from "../../utils/helper";
+import Loader from "../atoms/Loader";
 
 interface ProductDisplayModalProps {
     isOpen: boolean;
@@ -19,6 +24,7 @@ interface ActiveAttributes {
 }
 
 interface SelectedVariant extends IBaseProduct {
+    productId: string;
     attributes?: Record<string, string>;
 }
 
@@ -29,6 +35,9 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
     const [selectedVariant, setSelectedVariant] = useState<SelectedVariant | null>(null);
     const [buyingVariant, setBuyingVariant] = useState<SelectedVariant | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const [processing, setProcessing] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!product) return;
@@ -37,11 +46,12 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
 
         if (product.variantCombinations && product.variantCombinations.length > 0) {
             const firstCombination = product.variantCombinations[0];
-            const variant = { ...firstCombination.product, attributes: firstCombination.attributes };
+            const variant = { ...firstCombination.product, attributes: firstCombination.attributes, productId: product.id };
             setSelectedVariant(variant);
             setBuyingVariant(variant);
         } else {
             const variant = {
+                productId: product.id,
                 id: product.id,
                 name: product.name,
                 description: product.description,
@@ -100,7 +110,7 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
         );
 
         if (matchingVariant) {
-            const variant = { ...matchingVariant.product, attributes: matchingVariant.attributes };
+            const variant = { ...matchingVariant.product, attributes: matchingVariant.attributes, productId: product.id };
             setSelectedVariant(variant);
             setBuyingVariant(variant);
         } else {
@@ -119,8 +129,27 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
     };
 
 
-    const handleBuyNow = () => {
+    const handleBuyNow = async () => {
+        if(!buyingVariant) return;
+        
+        setProcessing(true);
 
+        try {
+            const session = await checkoutService.createSession({
+                items: [{
+                id: buyingVariant.id,
+                productId: buyingVariant.productId,
+                attributes: buyingVariant.attributes,
+                quantity
+            }]
+            })
+
+           navigate(`/checkout/${session.sessionId}`)
+        } catch (error) {
+            toast(handleError(error, "Failed to proceed to checkout"));
+        } finally {
+            setProcessing(false);
+        }
     };
 
     const onCloseHandler = () => {
@@ -189,7 +218,7 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
                         className="w-full"
                         disabled={!buyingVariant || buyingVariant.stock <= 0 || quantity > buyingVariant.stock}
                     >
-                        Buy Now
+                        {processing ? <Loader /> : "Buy Now"}
                     </Button>
 
                 </div>

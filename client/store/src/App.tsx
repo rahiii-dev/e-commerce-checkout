@@ -2,6 +2,7 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import AppLayout from "./components/templates/AppLayout";
 import LandingPage from "./pages/LandingPage";
 import { Toaster } from "sonner";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
           <Route element={<AppLayout />}>
             <Route path="/" element={<LandingPage />}/>
           </Route>
-
+          <Route path="/checkout/:id" element={<CheckoutPage />}/>
+          
           {/* unknown routes */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -1,6 +1,7 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import AppLayout from "./components/templates/AppLayout";
 import LandingPage from "./pages/LandingPage";
+import { Toaster } from "sonner";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
+      <Toaster richColors={true} visibleToasts={2} theme="dark"/>
     </>
   )
 }

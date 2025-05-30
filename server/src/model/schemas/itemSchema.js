@@ -6,6 +6,10 @@ export const ItemSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    id: {
+      type: String,
+      required: true,
+    },
     variantAttributes: {
       type: Map,
       of: String,

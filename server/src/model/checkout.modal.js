@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { ItemSchema } from "./schemas/itemSchema.js";
-import { addressSchema } from "./schemas/addressSchema.js";
 
 const checkoutSessionSchema = new mongoose.Schema({
   items: [ItemSchema],

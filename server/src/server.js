@@ -8,6 +8,7 @@ import { errorHandlerMiddleware, notFoundMiddlerare } from './middlewares/error.
 import { connectDB } from './lib/database.js';
 import productRoutes from './routes/product.routes.js';
 import checkoutRoutes from './routes/checkout.routes.js';
+import orderRoutes from './routes/order.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -23,8 +24,9 @@ app.get('/', (req, res) => {
   res.json('Welcome to Store 🚀');
 });
 
-app.use('/api/products', productRoutes)
-app.use('/api/checkout', checkoutRoutes)
+app.use('/api/products', productRoutes);
+app.use('/api/checkout', checkoutRoutes);
+app.use('/api/order', orderRoutes);
 
 app.use(notFoundMiddlerare);
 app.use(errorHandlerMiddleware);

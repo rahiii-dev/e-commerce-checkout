@@ -21,3 +21,5 @@ export const checkoutFormSchema = z.object({
     }, "Expiry must be a future date"),
   cvv: z.string().regex(/^\d{3}$/, "CVV must be 3 digits"),
 });
+
+export type ICheckoutFormData = z.infer<typeof checkoutFormSchema>;

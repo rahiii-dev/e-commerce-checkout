@@ -1,6 +1,7 @@
+import { Outlet } from "react-router-dom";
 import Logo from "../molecules/Logo";
 
-const CheckoutPageLayout = ({ children }: { children: React.ReactNode }) => {
+const LogoPageLayout = () => {
     return (
         <>
             <header>
@@ -8,10 +9,12 @@ const CheckoutPageLayout = ({ children }: { children: React.ReactNode }) => {
                     <Logo />
                 </nav>
             </header>
-            <main className="min-h-screen">{children}</main>
+            <main className="min-h-screen">
+                <Outlet/>
+            </main>
         </>
     );
 };
 
 
-export default CheckoutPageLayout;
+export default LogoPageLayout;

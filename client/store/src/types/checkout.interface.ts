@@ -1,13 +1,7 @@
-import type { IBaseProduct } from "./product.interface";
+import type { IItem } from "./item.interface";
 
-export interface ICheckoutItem extends IBaseProduct {
-    quantity: number;
-    subtotal: number;
-    image: string;
-    variantAttributes?: Record<string, string>;
-}
 export interface ICheckout {
-    items: ICheckoutItem[];
+    items: IItem[];
     totalAmount: number;
     expiresAt: Date;
 }

@@ -215,7 +215,7 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
                     {/* Buy now button */}
                     <Button
                         onClick={handleBuyNow}
-                        className="w-full"
+                        className="w-full cursor-pointer"
                         disabled={!buyingVariant || buyingVariant.stock <= 0 || quantity > buyingVariant.stock}
                     >
                         {processing ? <Loader /> : "Buy Now"}

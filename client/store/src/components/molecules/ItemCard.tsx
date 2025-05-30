@@ -1,10 +1,10 @@
-import type { ICheckoutItem } from "../../types/checkout.interface";
+import type { IItem } from "../../types/item.interface";
 
-interface CheckoutItemCardProps {
-    item: ICheckoutItem;
+interface ItemCardProps {
+    item: IItem;
 }
 
-const CheckoutItemCard = ({ item }: CheckoutItemCardProps) => {
+const ItemCard = ({ item }: ItemCardProps) => {
     const { name, image, quantity, price, subtotal, variantAttributes={} } = item;
     const attrs = variantAttributes instanceof Map
             ? Object.fromEntries(variantAttributes.entries())
@@ -49,4 +49,4 @@ const CheckoutItemCard = ({ item }: CheckoutItemCardProps) => {
     );
 };
 
-export default CheckoutItemCard;
+export default ItemCard;

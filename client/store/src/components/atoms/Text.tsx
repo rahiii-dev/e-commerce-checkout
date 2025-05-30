@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   children: React.ReactNode;
-  variant?: "normal";
+  variant?: "normal" | "primary" | "disabled" | "error";
   size?: "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
   as?: "p" | "span" | "h1" | "h2" | "h3" | "h4";
   className?: string;
@@ -21,6 +21,9 @@ const sizeClasses: Record<NonNullable<TextProps["size"]>, string> = {
 
 const variantClasses = {
   normal: "text-white",
+  primary: "text-primary",
+  disabled: "text-gray-400",
+  error: "text-red-400",
 };
 
 const Text = ({

@@ -1,50 +1,57 @@
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormField from "../../molecules/FormField";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
-import { checkoutFormSchema } from "./schema";
-import { useEffect } from "react";
-
-type FormData = z.infer<typeof checkoutFormSchema>;
+import { checkoutFormSchema, type ICheckoutFormData } from "./schema";
+import { useEffect, useState } from "react";
+import Loader from "../../atoms/Loader";
 
 const STORAGE_KEY = "checkout-form-data";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({
+  onSubmit,
+}: {
+  onSubmit(data: ICheckoutFormData): Promise<void>;
+}) => {
+  const [processing, setProcessing] = useState(false);
   const {
     register,
-    handleSubmit,
+    handleSubmit: rhfHandleSubmit,
     reset,
     watch,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<ICheckoutFormData>({
     resolver: zodResolver(checkoutFormSchema),
   });
 
-
+  // restore saved data
   useEffect(() => {
     const stored = sessionStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      reset(JSON.parse(stored));
-    }
+    if (stored) reset(JSON.parse(stored));
   }, [reset]);
 
-
+  // persist non-sensitive fields
   const watchedValues = watch();
   useEffect(() => {
     const { cardNumber, cvv, expiryDate, ...rest } = watchedValues;
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(rest));
   }, [watchedValues]);
 
-  const onSubmit = (data: FormData) => {
-    console.log("Submit checkout", data);
-    // Clear stored form data after successful checkout (optional)
-    // sessionStorage.removeItem(STORAGE_KEY);
-  };
+  // wrapped submit
+  const handleSubmit = rhfHandleSubmit(async (data) => {
+    setProcessing(true);
+    try {
+      await onSubmit(data);
+      sessionStorage.removeItem(STORAGE_KEY);
+    } finally {
+      setProcessing(false);
+    }
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto space-y-8">
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8">
+      {/* Shipping Details */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Shipping Details</h3>
 
@@ -79,6 +86,7 @@ const CheckoutForm = () => {
         </div>
       </div>
 
+      {/* Payment Details */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Payment Details</h3>
 
@@ -87,7 +95,10 @@ const CheckoutForm = () => {
         </FormField>
 
         <div className="grid grid-cols-2 gap-4">
-          <FormField label="Expiry Date (MM/YY)" error={errors.expiryDate?.message}>
+          <FormField
+            label="Expiry Date (MM/YY)"
+            error={errors.expiryDate?.message}
+          >
             <Input {...register("expiryDate")} placeholder="MM/YY" />
           </FormField>
 
@@ -97,8 +108,12 @@ const CheckoutForm = () => {
         </div>
       </div>
 
-      <Button type="submit" className="w-full mt-4 cursor-pointer">
-        Pay Now
+      <Button
+        type="submit"
+        className="w-full mt-4 cursor-pointer"
+        disabled={processing}
+      >
+        {processing ? <Loader/> : "Confirm Checkout"}
       </Button>
     </form>
   );

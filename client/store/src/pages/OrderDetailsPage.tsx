@@ -7,7 +7,6 @@ import type { IOrder } from "../types/order.interface";
 import OrderDetailsCard from "../components/organisms/OrderDetailsCard";
 import { orderService } from "../services/order.service";
 import GoBackWrapper from "../components/molecules/GoBackWrapper";
-import { toast } from "sonner";
 
 
 const ThankYouPage = () => {
@@ -24,7 +23,6 @@ const ThankYouPage = () => {
                 const data = await orderService.getOrderById(id);
                 setOrder(data);
             } catch (error) {
-                toast.error("Failed to load order details")
                 navigate("/");
             } finally {
                 setLoading(false);

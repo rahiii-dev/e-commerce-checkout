@@ -20,7 +20,6 @@ const CheckoutPage = () => {
     const [session, setSession] = useState<ICheckout | null>(null);
     const [order, setOrder] = useState<IOrder | null>(null);
     const [loading, setLoading] = useState(true);
-    const [processing, setProcessing] = useState(false);
 
     const navigate = useNavigate();
 
@@ -53,7 +52,6 @@ const CheckoutPage = () => {
     const handleFormSubmit = async (data: ICheckoutFormData) => {
         if (!id) return;
 
-        setProcessing(true);
         try {
             const order = await checkoutService.confirmCheckout({
                 sessionId: id,
@@ -76,21 +74,16 @@ const CheckoutPage = () => {
             searchParams.set("redirect", `/orders/${order.id}`);
             setSearchParams(searchParams, { replace: true });
             setOrder(order);
+            window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (error) {
             toast.error(handleError(error, "Failed to confirm checkout"))
-        } finally {
-            setProcessing(false);
-        }
+        } 
     };
 
 
-
-    if (loading || processing) return (
+    if (loading) return (
         <div className="w-screen h-screen flex justify-center items-center">
             <Loader size={50} />
-            {processing && (
-                <div>Checkout Processing please wait..</div>
-            )}
         </div>
     );
 

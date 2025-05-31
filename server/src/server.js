@@ -5,7 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import { errorHandlerMiddleware, notFoundMiddlerare } from './middlewares/error.middleware.js';
-import { connectDB } from './lib/database.js';
+import { connectDB } from './services/database.js';
 import productRoutes from './routes/product.routes.js';
 import checkoutRoutes from './routes/checkout.routes.js';
 import orderRoutes from './routes/order.routes.js';

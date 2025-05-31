@@ -4,6 +4,10 @@ import CheckoutSession from "../model/checkout.modal.js";
 import Order, { PAYMENT_METHODS } from "../model/order.model.js";
 import { generateOrderId } from "../utils/helper.js";
 import mongoose from "mongoose";
+import {
+  sendApprovedEmail,
+  sendDeclinedEmail,
+} from "../services/email/mailHelper.js";
 
 // @route   POST /api/chechkout/session
 // @desc    create checkout session
@@ -84,7 +88,7 @@ export const getCheckoutSession = asyncWrapper(async (req, res) => {
 
   if (!session) {
     res.status(404);
-    throw new Error("Invalid or Expired Session");
+    throw new Error("Invalid Session");
   }
 
   res.json(session);
@@ -154,9 +158,23 @@ export const confirmCheckout = asyncWrapper(async (req, res) => {
     const { cardNumber } = paymentDetails;
 
     if (cardNumber.startsWith("2222")) {
+      sendDeclinedEmail({
+        id: session._id,
+        email,
+        name: address.fullName,
+        items: session.toObject().items,
+        failureReason: "Payment was declined",
+      });
       res.status(402);
       throw new Error("Payment was declined");
     } else if (!cardNumber.startsWith("1111")) {
+      sendDeclinedEmail({
+        id: session._id,
+        email,
+        name: address.fullName,
+        items: session.toObject().items,
+        failureReason: "Payment gateway error",
+      });
       res.status(502);
       throw new Error("Payment gateway error");
     }
@@ -187,9 +205,8 @@ export const confirmCheckout = asyncWrapper(async (req, res) => {
     await mongoSession.commitTransaction();
     await mongoSession.endSession();
 
-    // Send email in background (not blocking)
+    sendApprovedEmail({ ...order[0].toObject(), name: address.fullName });
 
-    console.log(order);
     res.status(201).json(order[0]);
   } catch (err) {
     await mongoSession.abortTransaction();

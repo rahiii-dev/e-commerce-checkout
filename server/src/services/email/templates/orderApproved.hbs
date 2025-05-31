@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Confirmation</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* Centering container table */
+    .email-wrapper {
+      width: 100%;
+      padding: 20px 0;
+      background-color: #f9f9f9;
+    }
+
+    .email-container {
+      width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* Header styling */
+    .email-header {
+      background-color: #F97316; 
+      color: #ffffff;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .email-header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    /* Content area */
+    .email-content {
+      padding: 16px;
+    }
+
+    .email-content p {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+    }
+
+    /* Button wrapper/table */
+    .button-table {
+      margin: 20px auto 20px auto;
+      border-collapse: collapse;
+    }
+
+    .button-link {
+      display: inline-block;
+      background-color: #F97316; 
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Order‐details table */
+    .order-details {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .order-details th,
+    .order-details td {
+      border: 1px solid #d1d5db; 
+      padding: 8px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .order-details th {
+      background-color: #f3f4f6; 
+      font-weight: 500;
+    }
+
+    .product-cell {
+      vertical-align: top;
+      padding: 8px;
+    }
+
+    .product-info {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .product-info img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    .product-info .details {
+      font-size: 14px;
+      color: #1f2937; 
+    }
+
+    .product-info .details .variant {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #6b7280; 
+    }
+
+    /* Total line */
+    .total-line {
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Shipping address */
+    .shipping-heading {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #111827; 
+    }
+
+    .shipping-details {
+      font-size: 14px;
+      color: #4b5563; 
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Footer note */
+    .email-footer p {
+      margin: 16px 0 0 0;
+      font-size: 14px;
+      color: #374151; 
+    }
+
+    .email-footer a {
+      color: #2563eb; 
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <table role="presentation" class="email-wrapper">
+    <tr>
+      <td align="center">
+        <table role="presentation" class="email-container">
+          
+          <!-- Header -->
+          <tr>
+            <td class="email-header">
+              <h1>Thank you for your order!</h1>
+            </td>
+          </tr>
+
+          <!-- Greeting & Intro -->
+          <tr>
+            <td class="email-content">
+              <p>Hi {{customerName}},</p>
+              <p>We’re excited to let you know your order <strong>#{{orderId}}</strong> has been confirmed. Here are the details:</p>
+            </td>
+          </tr>
+
+          <!-- Order Details Table -->
+          <tr>
+            <td class="email-content">
+              <table role="presentation" class="order-details">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Sub Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each items}}
+                  <tr>
+                    <!-- Product Cell -->
+                    <td class="product-cell">
+                      <div class="product-info">
+                        {{#if this.image}}
+                          <img src="{{this.image}}" alt="{{this.name}}" />
+                        {{/if}}
+                        <div class="details">
+                          <div>{{this.name}}</div>
+                          {{#if this.variantAttributes}}
+                            <div class="variant">
+                              {{#each this.variantAttributes}}
+                                <div>{{@key}}: {{this}}</div>
+                              {{/each}}
+                            </div>
+                          {{/if}}
+                        </div>
+                      </div>
+                    </td>
+
+                    <!-- Quantity -->
+                    <td>{{this.quantity}}</td>
+
+                    <!-- Price -->
+                    <td>₹{{this.price}}</td>
+
+                    <!-- Sub Total -->
+                    <td>₹{{this.subtotal}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Total Amount -->
+          <tr>
+            <td class="email-content">
+              <p class="total-line">Total: ₹{{totalAmount}}</p>
+            </td>
+          </tr>
+
+          <!-- Shipping Address -->
+          <tr>
+            <td class="email-content">
+              <h3 class="shipping-heading">Shipping Address</h3>
+              <p class="shipping-details">
+                {{shipping.fullName}}<br/>
+                {{shipping.addressLine1}}<br/>
+                {{#if shipping.addressLine2}}
+                  {{shipping.addressLine2}}<br/>
+                {{/if}}
+                {{shipping.city}}, {{shipping.state}} – {{shipping.zipCode}}<br/>
+                {{shipping.country}}<br/>
+                Phone: {{shipping.phone}}
+              </p>
+            </td>
+
+            <!-- ───────── View Order Details Button ───────── -->
+              <table role="presentation" class="button-table" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <a
+                      href="{{viewOrderUrl}}"
+                      class="button-link"
+                      target="_blank"
+                    >
+                      View Order Details
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            <!-- ──────────────────────────────────────────────── -->
+          </tr>
+
+          <!-- Footer / Thank You Note -->
+          <tr>
+            <td class="email-content email-footer">
+              <p>Thanks for shopping with us!</p>
+              <p><em>Your Store App Team</em></p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

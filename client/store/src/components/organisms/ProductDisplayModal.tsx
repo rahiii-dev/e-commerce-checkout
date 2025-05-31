@@ -220,7 +220,8 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
                         className="w-full cursor-pointer"
                         disabled={!buyingVariant || buyingVariant.stock <= 0 || quantity > buyingVariant.stock}
                     >
-                        {processing ? <Loader /> : "Buy Now"}
+                        {processing ? <Loader /> 
+                                    : buyingVariant && buyingVariant.stock <= 0 ? "Out of Stock" :  "Buy Now"}
                     </Button>
 
                 </div>

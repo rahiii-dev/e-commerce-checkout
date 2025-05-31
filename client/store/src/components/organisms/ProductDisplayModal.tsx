@@ -43,25 +43,27 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
         if (!product) return;
 
         setQuantity(1);
+        let variant: SelectedVariant = {
+            productId: product.id,
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            images: product.images,
+            stock: product.stock
+        };
 
         if (product.variantCombinations && product.variantCombinations.length > 0) {
-            const firstCombination = product.variantCombinations[0];
-            const variant = { ...firstCombination.product, attributes: firstCombination.attributes, productId: product.id };
-            setSelectedVariant(variant);
-            setBuyingVariant(variant);
-        } else {
-            const variant = {
-                productId: product.id,
-                id: product.id,
-                name: product.name,
-                description: product.description,
-                price: product.price,
-                images: product.images,
-                stock: product.stock
-            };
-            setSelectedVariant(variant);
-            setBuyingVariant(variant);
+            const firstCombination = product.variantCombinations.find(combo => combo.product.stock > 0);
+            if (firstCombination) {
+                variant = { ...firstCombination.product, attributes: firstCombination.attributes, productId: product.id };
+            } else {
+                variant = {...variant, stock: 0}
+            }
         }
+
+        setSelectedVariant(variant);
+        setBuyingVariant(variant);
     }, [product]);
 
 
@@ -130,21 +132,21 @@ const ProductDisplayModal = ({ isOpen, onClose, product }: ProductDisplayModalPr
 
 
     const handleBuyNow = async () => {
-        if(!buyingVariant) return;
-        
+        if (!buyingVariant) return;
+
         setProcessing(true);
 
         try {
             const session = await checkoutService.createSession({
                 items: [{
-                id: buyingVariant.id,
-                productId: buyingVariant.productId,
-                attributes: buyingVariant.attributes,
-                quantity
-            }]
+                    id: buyingVariant.id,
+                    productId: buyingVariant.productId,
+                    attributes: buyingVariant.attributes,
+                    quantity
+                }]
             })
 
-           navigate(`/checkout/${session.sessionId}`)
+            navigate(`/checkout/${session.sessionId}`)
         } catch (error) {
             toast(handleError(error, "Failed to proceed to checkout"));
         } finally {
